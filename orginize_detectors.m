@@ -3,7 +3,7 @@
 % resnet_2 = load('YOLOv2_MBSize_10_MaxEpoch_20_InitLearnRate_1e-3_NumAnchors_15_Acc_11.mat');
 % resnet_2 = resnet_2.detector;
 %% Make table with made detectors
-Detectors = ["resnet_1";"resnet_2"]
+Detectors = ["resnet50_1";"resnet50_2"]
 ActivationLayer = ['activation_40_relu';'activation_40_relu'];
 MiniBatchSize = [32;10];
 IterationRate = [1e-3;1e-3];
@@ -26,3 +26,5 @@ variable_names = {'Detectors','ActivationLayer','MiniBatchSize', 'IterationRate'
 % add_Table = cell2table(add_on,'VariableNames', var_names)
 %% Append two tables together
 % detector_table = [detector_table;add_Table]
+%% Save table and variable names
+save('detector_table_info.mat', 'detector_table', 'variable_names');
