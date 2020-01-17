@@ -21,7 +21,7 @@ detector_table = table(Detectors, ActivationLayer, MiniBatchSize, IterationRate,
 variable_names = {'Detectors','ActivationLayer','MiniBatchSize', 'IterationRate', 'AnchorBoxes', 'Accuracy', 'ap', 'trecall', 'precision'};
 % add_on = {"resnet_3","activation_40_relu",40,0.001,4,54,NaN,NaN,NaN}; %ex
 % this will be the way we will append the cell in the script but we have to
-% make sure that the 
+% make sure that the strrings are indeed strings and use " " vs ' ' 
 %% Convert Cell into Table
 % add_Table = cell2table(add_on,'VariableNames', var_names)
 %% Append two tables together
