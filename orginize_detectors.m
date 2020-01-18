@@ -6,6 +6,7 @@
 Detectors = ["resnet50_1";"resnet50_2";"resnet50_3"];
 Solver = ["sgdm";"sgdm";"sgdm"];
 DatasetSize = [300;300;8000];
+SplitSize = [.7;.7;.7];
 InputImageSize = [[224 224];[224 224];[224 224]];
 ActivationLayer = ["activation_40_relu";"activation_40_relu";"activation_40_relu"];
 MiniBatchSize = [32;10;10];
@@ -15,9 +16,9 @@ Accuracy = [7;11;57];
 ap = [NaN;NaN;NaN];
 trecall = [NaN; NaN; NaN];
 precision = [NaN; NaN; NaN];
-variable_names = {'Detectors','Solver','DatasetSize','InputImageSize','ActivationLayer','MiniBatchSize', 'IterationRate', 'AnchorBoxes', 'Accuracy', 'ap', 'trecall', 'precision'};
+variable_names = {'Detectors','Solver','DatasetSize','SplitSize','InputImageSize','ActivationLayer','MiniBatchSize', 'IterationRate', 'AnchorBoxes', 'Accuracy', 'ap', 'trecall', 'precision'};
 % var_names = {'Network' 'Layer of Activation' 'Mini Batch Size' 'Iteration Rate' 'Anchor Box Number' 'Layer' 'ap' 'recall' 'precision'};
-detector_table = table(Detectors,Solver,DatasetSize,InputImageSize, ActivationLayer, MiniBatchSize, IterationRate, AnchorBoxes, Accuracy, ap, trecall, precision)
+detector_table = table(Detectors,Solver,DatasetSize,SplitSize, InputImageSize, ActivationLayer, MiniBatchSize, IterationRate, AnchorBoxes, Accuracy, ap, trecall, precision)
 
 %% Add another row to an existing table
 % this will be exported since all variable names between tables have to be the same 
