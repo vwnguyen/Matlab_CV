@@ -3,22 +3,22 @@
 % resnet_2 = load('YOLOv2_MBSize_10_MaxEpoch_20_InitLearnRate_1e-3_NumAnchors_15_Acc_11.mat');
 % resnet_2 = resnet_2.detector;
 %% Make table with made detectors
-Detectors = ["resnet50_1";"resnet50_2";"resnet50_3"];
-Solver = ["sgdm";"sgdm";"sgdm"];
-DatasetSize = [300;300;8000];
-SplitSize = [.7;.7;.7];
-InputImageSize = [[224 224];[224 224];[224 224]];
-ActivationLayer = ["activation_40_relu";"activation_40_relu";"activation_40_relu"];
-MiniBatchSize = [32;10;10];
-IterationRate = [1e-3;1e-3;1e-3];
-AnchorBoxes = [25;15;23];
-Accuracy = [7;11;57];
-ap = [NaN;NaN;NaN];
-trecall = [NaN; NaN; NaN];
-precision = [NaN; NaN; NaN];
-variable_names = {'Detectors','Solver','DatasetSize','SplitSize','InputImageSize','ActivationLayer','MiniBatchSize', 'IterationRate', 'AnchorBoxes', 'Accuracy', 'ap', 'trecall', 'precision'};
+Detectors = ["resnet50_1";"resnet50_2";"resnet50_3";"googlenet_4";"googlenet_5"];
+Solver = ["sgdm";"sgdm";"sgdm";"sgdm";"sgdm"];
+DatasetSize = [300;300;8000;8000;8000];
+SplitSize = [.7;.7;.7;.7;.9];
+InputImageSize = [[224 224];[224 224];[224 224];[224 224];[224 224]];
+ActivationLayer = ["activation_40_relu";"activation_40_relu";"activation_40_relu";"inception_5b-output";"inception_5b-output"];
+MiniBatchSize = [32;10;10;4;16];
+LearningRate = [1e-3;1e-3;1e-3;1e-3;1e-3];
+AnchorBoxes = [23;15;23;23;23];
+Accuracy = [7;11;57;23;19];
+ap = [0.0012;0.0082;0.0811;0.0232;0.0103];
+trecall = [NaN; NaN; NaN; NaN; NaN];
+precision = [NaN; NaN; NaN; NaN; NaN];
+variable_names = {'Detectors','Solver','DatasetSize','SplitSize','InputImageSize','ActivationLayer','MiniBatchSize', 'LearningRate', 'AnchorBoxes', 'Accuracy', 'ap', 'trecall', 'precision'};
 % var_names = {'Network' 'Layer of Activation' 'Mini Batch Size' 'Iteration Rate' 'Anchor Box Number' 'Layer' 'ap' 'recall' 'precision'};
-detector_table = table(Detectors,Solver,DatasetSize,SplitSize, InputImageSize, ActivationLayer, MiniBatchSize, IterationRate, AnchorBoxes, Accuracy, ap, trecall, precision)
+detector_table = table(Detectors,Solver,DatasetSize,SplitSize, InputImageSize, ActivationLayer, MiniBatchSize, LearningRate, AnchorBoxes, Accuracy, ap, trecall, precision)
 
 %% Add another row to an existing table
 % this will be exported since all variable names between tables have to be the same 
