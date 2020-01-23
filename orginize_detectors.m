@@ -13,7 +13,7 @@ ActivationLayer = ["activation_40_relu";"activation_40_relu";"activation_40_relu
     "inception_5b-output";"inception_5b-output";"activation_40_relu";
     "inception_5b-output";"activation_40_relu"];
 MiniBatchSize = [32;10;10;4;16;10;16;10];
-LearningRate = [1e-3;1e-3;1e-3;1e-3;1e-3;1e-3;1e-3;1e-3];
+LearningRate = [1e-3;1e-3;1e-3;1e-3;1e-3;1e-3;1e-3;1e-33];
 AnchorBoxes = [23;15;23;23;23;23;11;23];
 Accuracy = [7;11;57;23;19;53;17;56];
 ap = [0.0012;0.0082;0.0811;0.0232;0.0103;0.0916;0.0053;0.0205];
