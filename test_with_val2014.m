@@ -37,8 +37,16 @@ for i = 1:length(best_detectors)
         
         
 end
-   
+  
+% check to see if the file exists
+% if exist('resnet101_1.mat')
+% display('works')
+% else
+% display('lol')
+% end
+% works
 
+%% Function prototyping
 function data = preprocessData(data,targetSize)
 % Resize image and bounding boxes to the targetSize.
 scale = targetSize(1:2)./size(data{1},[1 2]);
