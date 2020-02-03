@@ -4,8 +4,8 @@ clc
 % clear cam;
 cam = webcam(2);
 cam.Resolution = '320x240';
-inputSize = [244 244 3];
-YOLO_Object_Classifier = load('resnet50_6.mat');
+inputSize = [331 331 3];
+YOLO_Object_Classifier = load('resnet101_3.mat');
 bboxAreaThreshold = 1000;
 theta = 0;
 phi = 0;
@@ -35,10 +35,10 @@ for  i = 1:10000
     % plot the initial confidence annotations
     if (~isempty(bboxes) && (length(bboxes)>0))
         img = insertObjectAnnotation(img,'rectangle',bboxes,scores); 
-        imshow(img);
+        %imshow(img);
         if length(xCenter) > 0 
             hold on;
-            plot(xCenter , yCenter  , 'r*', 'LineWidth', 2, 'MarkerSize', 3);
+            %plot(xCenter , yCenter  , 'r*', 'LineWidth', 2, 'MarkerSize', 3);
             for j = 1:length(xCenter)
                 P_A(j,:) = mapToRobotBase(theta,phi,psi,xCenter(j,1),yCenter(j,1),P_A_BORG);
                 coordinates(j) = cellstr(strcat(int2str(P_A(j,1)),',',int2str(P_A(j,2))));
@@ -49,7 +49,7 @@ for  i = 1:10000
         end 
         % clear the coordinate array    
     else
-        imshow(img);
+        %imshow(img);
     end
     % replace display to output coordinates instead
     % when you need to modularize this code
