@@ -3,7 +3,7 @@ clear vars
 clc
 
 %% Load in test video footage and save to a folder directory
-dir_str = '..\test_facility_video' %%
+dir_str = '..\test_facility_video_feed' %%
 if ~exist(dir_str)
     mkdir(dir_str)
     gTruth_1 = load("test\video_facility_test_short.mat");

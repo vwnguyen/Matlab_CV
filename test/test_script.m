@@ -6,11 +6,40 @@
 clc;
 clear all;
 
-%% Load in detectors and dataset
+%% Load in detectors 
+folder_string = "tinyYOLO Detectors";
+folder_struct = dir(folder_string);
+folder_info = struct2cell(folder_struct);
+folder_info = folder_info(1,:)'
+folder_info = folder_info(4:end,1)
 
-best_detectors = {'resnet101_1','resnet50_4'};
-load('val2014_dataset.mat');
-valDataset = images_val_2014;
+ap_report = [];
+for i = 1:length(folder_info)
+   %Load in test table
+    load(strcat('tinyYOLO Detectors\',folder_info{i}))
+
+    load('facility_val_test_data.mat');
+    test_data = TestDataTable;
+    test_data.Properties.VariableNames{'cans'} = 'can'
+    imdsTest = imageDatastore(test_data{:,'imageFilename'});
+    bldsTest = boxLabelDatastore(test_data(:,(2:5)));
+    test_data = combine(imdsTest,bldsTest);
+    preprocessedTestData = transform(test_data,@(data)preprocessData(data, detector.TrainingImageSize))
+    detectionResults = detect(detector, preprocessedTestData)
+    [ap,recall,precision] = evaluateDetectionPrecision(detectionResults, preprocessedTestData)
+    ap_report = [ap_report ap];
+    
+    
+end
+%%
+
+load('..\facility_val_test_data.mat');
+test_data = TestDataTable;
+imdsTest = imageDatastore(testDataTbl{:,'imageFilename'});
+bldsTest = boxLabelDatastore(testDataTbl(:,'bottle'));
+test_data = combine(imdsTest,bldsTest);
+preprocessedTestData = transform(test_data,@(data)preprocessData(data,inputSize));
+
 val_files = dir('../Downloads/val2014'); %finds directory with file names
 val_folder_path = val_files(1).folder;
 fullImageName = fullfile(val_folder_path,valDataset(:,1));
@@ -27,8 +56,8 @@ for i = 1:length(best_detectors)
         % create datastores for images labels and bounding boxes
         imdsTest = imageDatastore(testDataTbl{:,'imageFilename'});
         bldsTest = boxLabelDatastore(testDataTbl(:,'bottle'));
-        testData = combine(imdsTest,bldsTest);
-        preprocessedTestData = transform(testData,@(data)preprocessData(data,inputSize));
+        test_data = combine(imdsTest,bldsTest);
+        preprocessedTestData = transform(test_data,@(data)preprocessData(data,inputSize));
         detectionResults = detect(detector, preprocessedTestData);
         [ap,recall,precision] = evaluateDetectionPrecision(detectionResults, preprocessedTestData);
         ap_report = [ap_report ap];
