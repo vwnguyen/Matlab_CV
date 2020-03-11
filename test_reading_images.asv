@@ -22,12 +22,12 @@ for i = 1:height(facility_footage)
         test_images{index,1} = strcat('..\test_images\',test_images{index,1});
         index = index + 1;
     end
-    if index == 100
+    if index == 99
         break;
     end
 end
 
-if length(folder_info)-2 == height(test_images)
+if length(folder_info) == height(test_images)
     save('test_images_table', 'test_images');
 end
 
